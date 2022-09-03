@@ -21,7 +21,16 @@ exit;
 
 sub get_param {
     my $dir = dir( "image/" );
-    my @files = sort $dir->children;
+    my @files = map { $_->[1] }
+                sort { $a->[0] cmp $b->[0] }
+                map {
+                    my @terms = split m{[.]}, $_->basename;
+                    if ( @terms == 2 ) {
+                        @terms = ( $terms[0], 1, $terms[1] );
+                    }
+                    [ join( q{.}, @terms ), $_ ];
+                }
+                $dir->children;
     return (
         files => [
             map { { title => $_->basename, link => $_ } }
