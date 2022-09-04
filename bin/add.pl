@@ -29,7 +29,6 @@ sub get_new_filename {
     while ( 1 ) {
         my $basename = join q{.}, ( localtime->date, $suffix != 1 ? ( $suffix ) : ( ), q{png} );
         my $file = $dir->file( $basename );
-        warn "\$file: $file";
         return $file
             if ! -e $file;
         $suffix++;

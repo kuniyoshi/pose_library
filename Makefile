@@ -1,4 +1,7 @@
-.PHONY: copy readme
+.PHONY: usage copy readme
+
+usage:
+	@echo "make <copy, readme>"
 
 copy:
 	bin/add.pl
